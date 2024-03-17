@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--    스프링 MVC 설정을 어노테이션 기반으로 처리한다. 스프링 MVC 의 여러객체들을 자동으로 스프링의 빈으로 등록하게 하는 기능-->
+
+
+<!--    <mvc:annotation-driven conversion-service="conversionService"/>-->
+
+
+    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+    <!--    이미지나, HTML 같은 정적인 리소스들의 경로 지정-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!--    스프링 MVC 에서 제공하는 view 를 결정하는 결정자, prefix suffix-->
+    <context:component-scan base-package="com.ssg.productapp.controller"/>
+
+
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssg.productapp.mapper.ProductMapper">
+    <insert id="insert">
+        insert into product(pname, pprice, pstock) values (#{pname}, #{pprice}, #{pstock})
+    </insert>
+
+    <select id="selectOne" resultType="com.ssg.productapp.domain.ProductVO">
+        select * from product where pno = #{pno}
+    </select>
+
+    <select id="selectList" resultType="com.ssg.productapp.domain.ProductVO">
+        select * from product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                pname like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by pno desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(pno) from product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                pname like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete">
+        delete from product where pno = #{pno}
+    </delete>
+
+    <update id="update">
+        update product set pname = #{pname}, pprice = #{pprice}, pstock = #{pstock} where pno = #{pno}
+    </update>
+</mapper>
